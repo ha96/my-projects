@@ -112,9 +112,22 @@ class playspace:
             #t=int(input("if you want to start the game please enter ( 1 ) to exsit ( 0 )"))  
             while(c<=8):
                 if(y==1):
-                  x=int(input("\nplayer1:please enter the position number:"))
-                  while(str(self.l2[x]).isalpha()):  
-                    x=int(input("\nplayer1:please enter the position number becase the position is taken:"))
+                  while(1):
+                        x=(input("\nplayer1:please enter the position number:"))
+                        
+                        if not(x.isdigit()):
+                            print("\nyour chois is not correct please re-enter youe choice \n")
+                            continue
+                        elif int(x)>=len(self.l2):
+                                print("\nyour chois is out of range please re-enter yor choice \n")
+                                continue
+                        elif(str(self.l2[int(x)]).isalpha()):  
+                            print("\nplayer1:please enter the position number becase the position is taken:")
+                            continue    
+                        else :
+                            break  
+                  
+                  x=int(x)
                   self.l2[x]=self.info[2]
                   playspace.plot(self)
                   result=playspace.win(self)
@@ -127,9 +140,23 @@ class playspace:
                       print("the score is \n",self.info[0]+" :",self.score1,"\n",self.info[1]+" :",self.score2)
                       break
                   
-                  x=int(input("\nplayer2:please enter the position number:"))  
-                  while(str(self.l2[x]).isalpha()):  
-                    x=int(input("\nplayer2:please enter the position number becase the position is taken:"))
+                      while(1):
+                        x=(input("\nplayer2:please enter the position number:"))
+                     
+                        if not(x.isdigit()):
+                            print("\nyour chois is not correct please re-enter youe choice \n")
+                            continue
+                        elif int(x)>=len(self.l2):
+                                print("\nyour chois is out of range please re-enter yor choice \n")
+                                continue
+                        elif(str(self.l2[int(x)]).isalpha()):  
+                            print("\nplayer2:please enter the position number becase the position is taken:")
+                            continue       
+                            
+                            
+                        else :
+                            break
+                  x=int(x)
                   self.l2[x]=self.info[3]
                   playspace.plot(self)
                   ch=playspace.cheack(self)
@@ -141,9 +168,23 @@ class playspace:
                       print("the score is \n",self.info[0]+" :",self.score1,"\n",self.info[1]+" :",self.score2)
                       break
                 if(y==2):
-                    x=int(input("\nplayer2:please enter the position number:"))  
-                    while(str(self.l2[x]).isalpha()):  
-                      x=int(input("\nplayer2:please enter the position number becase the position is taken:"))
+                    while(1):
+                        x=(input("\nplayer2:please enter the position number:"))
+                     
+                        if not(x.isdigit()):
+                            print("\nyour chois is not correct please re-enter youe choice \n")
+                            continue
+                        elif int(x)>=len(self.l2):
+                                print("\nyour chois is out of range please re-enter yor choice \n")
+                                continue
+                        elif(str(self.l2[int(x)]).isalpha()):  
+                            print("\nplayer2:please enter the position number becase the position is taken:")
+                            continue       
+                            
+                            
+                        else :
+                            break
+                    x=int(x)
                     self.l2[x]=self.info[3]
                     playspace.plot(self)
                     result=playspace.win(self)
@@ -155,9 +196,22 @@ class playspace:
                         print("there is no winner")
                         print("the score is \n",self.info[0]+" :",self.score1,"\n",self.info[1]+" :",self.score2)
                         break
-                    x=int(input("\nplayer1:please enter the position number:"))
-                    while(str(self.l2[x]).isalpha()):  
-                      x=int(input("\nplayer1:please enter the position number becase the position is taken:"))
+                    while(1):
+                        x=(input("\nplayer1:please enter the position number:"))
+                        
+                        if not(x.isdigit()):
+                            print("\nyour chois is not correct please re-enter youe choice \n")
+                            continue
+                        elif int(x)>=len(self.l2):
+                                print("\nyour chois is out of range please re-enter yor choice \n")
+                                continue
+                        elif(str(self.l2[int(x)]).isalpha()):  
+                            print("\nplayer1:please enter the position number becase the position is taken:")
+                            continue    
+                        else :
+                            break  
+                  
+                    x=int(x)
                     self.l2[x]=self.info[2]
                     playspace.plot(self)
                     result=playspace.win(self)
@@ -170,18 +224,7 @@ class playspace:
                         print("the score is \n",self.info[0]+" :",self.score1,"\n",self.info[1]+" :",self.score2)
                         break
                 
-                """""print(result)
-                if result[0]==1:
-                    if self.l2[result[-1]]==self.info[2]:
-                        print("/nthe winner is player1:",self.info[0])
-                        score1=score1+1
-                        print("the score is \n",self.info[0]+" :",score1,"\n",self.info[1]+" :",score2)
-                        break
-                    if self.l2[result[-1]]==self.info[3]:
-                        print("/nthe winner is player2:",self.info[1])
-                        score2=score2+1
-                        print("the score is \n",self.info[0]+" :",score1,"\n",self.info[1]+" :",score2)
-                        break"""
+                
                     
                
             
