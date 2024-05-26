@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .menu {
+            width: 200px;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        .change-password-btn,
+        .upload-pdf-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .change-password-btn:hover,
+        .upload-pdf-btn:hover {
+            background-color: #555;
+        }
+
+        .create-post-input,
+        .upload-pdf-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Add style for the horizontal line */
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'puplic_post' %}">Public post</a>
+        <a href="{% url 'puplic_files' %}">Public files</a>
+        <a href="{% url 'create_post' %}">Create post</a>
+        <a href="{% url 'create_file' %}">Upload File</a>
+        <a href="{% url 'my_files' %}">My Files</a>
+        <a href="{% url 'scan_link' %}">Link Scanner</a>
+        {% if userinfo.is_supervisor %}
+        <a href="{% url 'pend_post' %}">Pend post</a>
+        <a href="{% url 'pendingfiles' %}">file approval</a>
+        <a href="{% url 'unusualactivity' %}">Unusual activity</a>
+        {% endif %}
+        <a href="{% url 'user_logout' %}">Logout</a>
+    </nav>
+
+    <div class="content">
+        <div class="menu">
+            <h2>info</h2>
+            <p>Name: {{ userinfo.full_name }}</p>
+            <p>Email: {{ useremail }}</p>
+            <p>Phone: {{ userinfo.phone_number }}</p>
+            <p>Bio: {{ userinfo.bio }}</p>
+            <!-- Change Password Form -->
+<!--            <form action="changepassword.html" method="post">-->
+<!--                <button type="submit" class="change-password-btn">Change Password</button>-->
+<!--            </form>-->
+        </div>
+
+        <div>
+            <!-- Your webpage content goes here -->
+            <h1>Welcome to Your profile </h1>
+            <h3>here you will find your posts and your uploaded files even the hidden ones also you can see your personal info and change your password</h3>
+            <h4>you can navigate in navigation bar to create posts and upload your fils  </h4>
+            <h4>NOTE: only the social posts can appears in public without approval from each category supervisor otherwise other posts must have approval</h4>
+
+            <hr>
+            <div>
+            <h1>your Posts</h1>
+
+            {% if userPosts %}
+                <ul>
+                    {% for post in userPosts %}
+                    {% if post.category_enum == 1 %}
+                        <p>Category: SOCIAL</p>
+                    {% endif %}
+                    {% if post.category_enum == 2 %}
+                        <p>Category: EDUCATIONAL</p>
+                    {% endif %}
+                    {% if post.category_enum == 3 %}
+                        <p>Category: PROGRAMMING</p>
+                    {% endif %}
+                    {% if post.category_enum == 4 %}
+                        <p>Category: NETWORKING</p>
+                    {% endif %}
+                    <br>
+                    <li>{{ post.content }} <br><br>
+            <p> Show :{{post.show}}</p>
+            <br>
+            <p> approved :{{post.approved}}</p>
+            <br> <br>{{ post.created_datetime }}</li>
+                    <br>
+                    <form action="/hidepost/{{post.id}}/" method = "post">{% csrf_token %}
+
+            <input type="submit" class="btn btn-primary" value="Hide">
+            </form>
+                    <br>
+                    <hr>
+            {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts available.</p>
+            {% endif %}
+
+
+        </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

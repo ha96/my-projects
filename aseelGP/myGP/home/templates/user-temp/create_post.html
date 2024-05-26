@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .menu {
+            width: 200px;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        .change-password-btn,
+        .upload-pdf-btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .change-password-btn:hover,
+        .upload-pdf-btn:hover {
+            background-color: #555;
+        }
+
+        .create-post-input,
+        .upload-pdf-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Add style for the horizontal line */
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'puplic_post' %}">Public post</a>
+        <a href="{% url 'puplic_files' %}">Public files</a>
+        <a href="{% url 'create_post' %}">Create post</a>
+        <a href="{% url 'create_file' %}">Upload File</a>
+        <a href="{% url 'my_files' %}">My Files</a>
+        <a href="{% url 'scan_link' %}">Link Scanner</a>
+        {% if userinfo.is_supervisor %}
+        <a href="{% url 'pend_post' %}">Pend post</a>
+        <a href="{% url 'pendingfiles' %}">file approval</a>
+        <a href="{% url 'unusualactivity' %}">Unusual activity</a>
+        {% endif %}
+        <a href="{% url 'user_logout' %}">Logout</a>
+    </nav>
+
+    <div class="content">
+<form action="{% url 'create_post' %}" method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit">Post</button>
+            </form>
+
+
+
+    </div>
+
+</body>
+
+</html>

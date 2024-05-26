@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signup</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #2c3e50, #3498db);
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 1em;
+      color: #ecf0f1;
+    }
+
+    .shape {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(to bottom right, #3498db, #000000);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      transform: rotate(45deg);
+      animation: moveShape 5s infinite alternate;
+    }
+
+    .shape:nth-child(2) {
+      top: 15%;
+      left: 25%;
+    }
+
+    .shape:nth-child(3) {
+      top: 70%;
+      left: 60%;
+    }
+
+    @keyframes moveShape {
+      0% {
+        transform: rotate(45deg) translate(0, 0);
+      }
+      100% {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    form {
+      background: rgba(0, 0, 0, 0.7); /* Dark background color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      max-width: 7000px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ecf0f1;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #95a5a6;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #000000;
+    }
+
+    .error {
+            color: red;
+            font-weight: bold;
+        }
+  </style>
+</head>
+<body class="hhh">
+  <div class="container">
+    <form method="post" action="{% url 'signup_view' %}">
+        <h2>Signup</h2>
+      <h5>	Welcome aboard! Your exciting journey with us is about to begin. Get ready for great experiences together</h5>
+{% if register == 'false' %}
+      <div class="error">
+        <p>Error: We're sorry, but the registration process was unsuccessful. Please try again.</p>
+    </div>
+      {% endif %}
+        {% csrf_token %}
+
+      <!-- Display UserForm errors -->
+      <!-- UserForm Fields -->
+      <label for="{{ user_form.email.id_for_label }}">Email</label>
+      {{ user_form.email }}
+      <div style="color: red;">
+      {{ user_form.email.errors }}
+      </div>
+
+      <label for="{{ user_form.password.id_for_label }}">Password</label>
+      {{ user_form.password }}
+      <div style="color: red;">
+      {{ user_form.password.errors }}
+      </div>
+
+
+
+      <!-- UserAddForm Fields -->
+      <label for="{{ add_user.full_name.id_for_label }}">Full Name</label>
+      {{ add_user.full_name }}
+      <div style="color: red;">
+      {{ add_user.full_name.errors }}
+      </div>
+
+      <label for="{{ add_user.age.id_for_label }}">Age</label>
+      {{ add_user.age }}
+      <div style="color: red;">
+      {{ add_user.age.errors }}
+      </div>
+
+      <label for="{{ add_user.phone_number.id_for_label }}">Phone Number</label>
+      {{ add_user.phone_number }}
+      <div style="color: red;">
+      {{ add_user.phone_number.errors }}
+      </div>
+
+      <label for="{{ add_user.bio.id_for_label }}">Bio</label>
+      {{ add_user.bio }}
+      <div style="color: red;">
+      {{ add_user.bio.errors }}
+      </div>
+
+
+      <button>Signup Now</button>
+    </form>
+  </div>
+</body>
+</html>

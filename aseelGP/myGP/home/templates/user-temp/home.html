@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyLab</title>
+    <link rel="stylesheet" href="static/css/homestyle.css" />
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <a href="{% url 'home' %}" class="nav_logo">StudyLab</a>
+
+        <ul class="nav_items">
+          <li class="nav_item">
+            <a href="{% url 'home' %}" class="nav_link">Home</a>
+            <a href="{% url 'signup_view' %}" class="nav_link">Signup</a>
+            <a href="{% url 'scan_link' %}">Link Scanner</a>
+            <a href="#" class="nav_link">Contact</a>
+          </li>
+        </ul>
+
+        <button class="button" id="form-open">Login</button>
+      </nav>
+    </header>
+
+    <!-- Home -->
+    <section class="home">
+      <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login From -->
+        <div class="form login_form">
+          <form method="post" action="{% url 'user_login' %}">
+            {% csrf_token %}
+            <h2>Login</h2>
+
+            <div class="input_box">
+
+              <input type="email" name="email" placeholder="Enter your email" required />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+
+              <input type="password" name="password" placeholder="Enter your password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <div class="option_field">
+<!--              <span class="checkbox">-->
+<!--                <input type="checkbox" id="check" />-->
+<!--&lt;!&ndash;                <label for="check">Remember me</label>&ndash;&gt;-->
+<!--              </span>-->
+<!--              <a href="#" class="forgot_pw">Forgot password?</a>-->
+            </div>
+
+<!--        <div class="form login_form">-->
+<!--          <form method="post" action="{% url 'signup_view' %}">-->
+<!--            {% csrf_token %}-->
+<!--            <h2>Login</h2>-->
+
+<!--            <div class="input_box">-->
+<!--              <input type="email" name="email" placeholder="Enter your email" required />-->
+<!--              <i class="uil uil-envelope-alt email"></i>-->
+<!--            </div>-->
+<!--            <div class="input_box">-->
+<!--              <input type="password" name="password" placeholder="Enter your password" required />-->
+<!--              <i class="uil uil-lock password"></i>-->
+<!--              <i class="uil uil-eye-slash pw_hide"></i>-->
+<!--            </div>-->
+
+<!--            <div class="input_box">-->
+<!--              <input type="text" name="full_name" placeholder="Enter your password" required />-->
+
+<!--              <i class="uil uil-envelope-alt text"></i>-->
+<!--            </div>-->
+
+<!--            <div class="input_box">-->
+<!--              <input type="number" name="age" required />-->
+<!--              <i class="uil uil-envelope-alt number"></i>-->
+<!--            </div>-->
+
+<!--            <div class="input_box">-->
+<!--              <input type="tel" name="phone_number" required />-->
+<!--              {{ add_user.phone_number }}-->
+<!--              <i class="uil uil-envelope-alt tel"></i>-->
+<!--            </div>-->
+
+<!--            <div class="input_box">-->
+<!--              <input type="text" name="bio" required />-->
+<!--              {{ add_user.bio }}-->
+<!--              <i class="uil uil-envelope-alt text"></i>-->
+<!--            </div>-->
+
+<!--&lt;!&ndash;            <div class="option_field">&ndash;&gt;-->
+<!--&lt;!&ndash;              <span class="checkbox">&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="checkbox" id="check" />&ndash;&gt;-->
+<!--&lt;!&ndash;                <label for="check">Remember me</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              </span>&ndash;&gt;-->
+<!--&lt;!&ndash;              <a href="#" class="forgot_pw">Forgot password?</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+            <button class="button">Login Now</button>
+
+            <div >Don't have an account? <a href="{% url 'signup_view' %}">Signup</a></div>
+          </form>
+        </div>
+
+<!--        &lt;!&ndash; Signup From &ndash;&gt;-->
+<!--        <div class="form signup_form">-->
+<!--          <form method="post" action="{% url 'signup_view' %}">-->
+<!--            {% csrf_token %}-->
+<!--            <h2>Signup</h2>-->
+
+<!--            <div class="input_box">-->
+<!--              <input type="email" placeholder="Enter your email" required />-->
+<!--              <i class="uil uil-envelope-alt email"></i>-->
+<!--            </div>-->
+<!--            <div class="input_box">-->
+<!--              <input type="password" placeholder="Create password" required />-->
+<!--              <i class="uil uil-lock password"></i>-->
+<!--              <i class="uil uil-eye-slash pw_hide"></i>-->
+<!--            </div>-->
+<!--            <div class="input_box">-->
+<!--              <input type="password" placeholder="Confirm password" required />-->
+<!--              <i class="uil uil-lock password"></i>-->
+<!--              <i class="uil uil-eye-slash pw_hide"></i>-->
+<!--            </div>-->
+
+<!--            <button class="button">Signup Now</button>-->
+
+<!--            <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>-->
+          </form>
+        </div>
+      </div>
+    </section>
+
+{% if register == 'true' %}
+      <div id='card' class="animated fadeIn">
+  <div id='upper-side'>
+    <?xml version="1.0" encoding="utf-8"?>
+      <!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+      <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+      <svg version="1.1" id="checkmark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve">
+        <path d="M131.583,92.152l-0.026-0.041c-0.713-1.118-2.197-1.447-3.316-0.734l-31.782,20.257l-4.74-12.65
+	c-0.483-1.29-1.882-1.958-3.124-1.493l-0.045,0.017c-1.242,0.465-1.857,1.888-1.374,3.178l5.763,15.382
+	c0.131,0.351,0.334,0.65,0.579,0.898c0.028,0.029,0.06,0.052,0.089,0.08c0.08,0.073,0.159,0.147,0.246,0.209
+	c0.071,0.051,0.147,0.091,0.222,0.133c0.058,0.033,0.115,0.069,0.175,0.097c0.081,0.037,0.165,0.063,0.249,0.091
+	c0.065,0.022,0.128,0.047,0.195,0.063c0.079,0.019,0.159,0.026,0.239,0.037c0.074,0.01,0.147,0.024,0.221,0.027
+	c0.097,0.004,0.194-0.006,0.292-0.014c0.055-0.005,0.109-0.003,0.163-0.012c0.323-0.048,0.641-0.16,0.933-0.346l34.305-21.865
+	C131.967,94.755,132.296,93.271,131.583,92.152z" />
+        <circle fill="none" stroke="#ffffff" stroke-width="5" stroke-miterlimit="10" cx="109.486" cy="104.353" r="32.53" />
+      </svg>
+      <h3 id='status'>
+      Success
+    </h3>
+  </div>
+  <div id='lower-side'>
+    <p id='message'>
+      Congratulations, your account has been successfully created.
+    </p>
+    <a href="#" id="contBtn">Continue</a>
+  </div>
+  </div>
+{% endif %}
+    <script src="static/js/homescript.js"></script>
+  </body>
+</html>

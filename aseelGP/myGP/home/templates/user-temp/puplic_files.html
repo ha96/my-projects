@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Files</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f8f8f8;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            flex-direction: column-reverse; /* Change to column-reverse for the latest post on top */
+            padding: 20px;
+        }
+
+        /* Styles for the rest of your code remain unchanged */
+
+        /* Add your existing styles here */
+
+        .post-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .post-metadata {
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'puplic_post' %}">Public post</a>
+        <a href="{% url 'puplic_files' %}">Public files</a>
+        <a href="{% url 'create_post' %}">Create post</a>
+        <a href="{% url 'create_file' %}">Upload File</a>
+        <a href="{% url 'my_files' %}">My Files</a>
+        <a href="{% url 'scan_link' %}">Link Scanner</a>
+        {% if userinfo.is_supervisor %}
+        <a href="{% url 'pend_post' %}">Pend post</a>
+        <a href="{% url 'pendingfiles' %}">file approval</a>
+        <a href="{% url 'unusualactivity' %}">Unusual activity</a>
+        {% endif %}
+        <a href="{% url 'user_logout' %}">Logout</a>
+    </nav>
+
+    <div class="content">
+        {% for file in files reversed %} <!-- Reverse the order of posts to show the latest one on top -->
+        <div class="post-container">
+            <p>Creator: {{ file.owner.userinfo.full_name }}</p>
+            {% if is_super %}
+                <p>Email: {{ file.owner }}</p>
+            <br>
+                <form action="/hidefile/{{file.id}}/" method = "post">{% csrf_token %}
+
+            <input type="submit" class="btn btn-primary" value="disapprove">
+            </form>
+            {% else %}
+                <p>Email: XXXXXXXXXXXX</p>
+            {% endif %}
+            {% if file.category_enum == 1 %}
+                <p>Category: SOCIAL</p>
+            {% endif %}
+            {% if file.category_enum == 2 %}
+                <p>Category: EDUCATIONAL</p>
+            {% endif %}
+            {% if file.category_enum == 3 %}
+                <p>Category: PROGRAMMING</p>
+            {% endif %}
+            {% if file.category_enum == 4 %}
+                <p>Category: NETWORKING</p>
+            {% endif %}
+            <p>{{ file.file }}</p>
+            <p class="post-metadata">{{ post.created_datetime }}</p>
+            <form action="/download_file/{{file.id}}/" method = "post">{% csrf_token %}
+
+            <input type="submit" class="btn btn-primary" value="download">
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pend Post</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .post-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .post-metadata {
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'puplic_post' %}">Public post</a>
+        <a href="{% url 'puplic_files' %}">Public files</a>
+        <a href="{% url 'create_post' %}">Create post</a>
+        <a href="{% url 'create_file' %}">Upload File</a>
+        <a href="{% url 'my_files' %}">My Files</a>
+        <a href="{% url 'scan_link' %}">Link Scanner</a>
+        {% if userinfo.is_supervisor %}
+        <a href="{% url 'pend_post' %}">Pend post</a>
+        <a href="{% url 'pendingfiles' %}">file approval</a>
+        <a href="{% url 'unusualactivity' %}">Unusual activity</a>
+        {% endif %}
+        <a href="{% url 'user_logout' %}">Logout</a>
+    </nav>
+
+    <div class="content">
+        {% for post in posts %}
+        <div class="post-container">
+            <p>Creator: {{ post.owner.userinfo.full_name }}</p>
+            <p>Email:{{ post.owner }}</p>
+            {% if post.category_enum == 1 %}
+                <p>Category: SOCIAL</p>
+            {% endif %}
+            {% if post.category_enum == 2 %}
+                <p>Category: EDUCATIONAL</p>
+            {% endif %}
+            {% if post.category_enum == 3 %}
+                <p>Category: PROGRAMMING</p>
+            {% endif %}
+            {% if post.category_enum == 4 %}
+                <p>Category: NETWORKING</p>
+            {% endif %}
+            <p>{{ post.content }}</p>
+            <p class="post-metadata">{{ post.created_datetime }}</p>
+            <form action="/showpost/{{post.id}}/" method = "post">{% csrf_token %}
+
+            <input type="submit" class="btn btn-primary" value="Approve">
+        </form>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>
